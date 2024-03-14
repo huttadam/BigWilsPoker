@@ -1,0 +1,94 @@
+/* Reset */
+
+* {
+    margin: 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+
+}
+
+.timers-time {
+    color: #fff;
+    font-size: 5vw;
+    font-family: Aladin;
+    margin: 1rem;
+}
+
+.timer-buttons {
+    width: 100vw;
+}
+
+.timer-buttons button {
+    margin: 0.15rem;
+    border: none;
+    padding: 1.25rem 3.75rem;
+    cursor: pointer;
+    color: #fff;
+    font-size: 5vw;
+}
+
+.timer-buttons button:first-child {
+    background-color: green;
+}
+
+.timer-buttons button:nth-child(2) {
+    background-color: red;
+}
+
+.timer-buttons button:last-child {
+    background-color: yellowgreen;
+}
+
+
+.blinds-header {
+    font-size: 5vw;
+    color: gold;
+}
+
+.chip-container {
+    display: flex;
+    /* flex-direction: column; // for MQ  */
+    flex-direction: row;
+    /* order: -1; */
+    border: white solid 0.3rem;
+    border-radius: 2rem;
+    background-color: darkslateblue;
+    padding: 1.5rem 0rem;
+    box-sizing: border-box;
+    width:100%;
+    overflow-x: auto;
+}
+
+.chip{
+    padding: 0rem 1.5rem;
+    
+}
+
+.timer-function-container {
+    margin:auto;
+    margin-top: 1rem;
+}
+
+.page-cont {
+    display: flex;
+    /* flex-direction: row; // change for MQ */
+    flex-direction: column;
+    /* align-items: flex-start;
+    justify-content: space-between; */
+
+}
+
+select {
+  padding: 0.5rem;
+  font-size: 5vw;
+  border: 0.25rem solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+

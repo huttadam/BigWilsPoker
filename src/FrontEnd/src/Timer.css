@@ -1,35 +1,35 @@
 /* Reset */
-
 * {
     margin: 0;
-    padding : 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
     background-color: black;
     margin: 0;
-
 }
 
 .timers-time {
     color: #fff;
-    font-size: 5vw;
+    font-size: 5vw; /* Keeping vw for font-size to make it scalable */
     font-family: Aladin;
-    margin: 1rem;
+    margin: 5vh auto; /* Using vh for margin to center vertically */
 }
 
 .timer-buttons {
-    width: 100vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .timer-buttons button {
-    margin: 0.15rem;
+    margin: 1vh 1vw; /* Using vh and vw for margin */
     border: none;
-    padding: 1.25rem 3.75rem;
+    padding: 2vh 6vw; /* Using vh and vw for padding */
     cursor: pointer;
     color: #fff;
-    font-size: 5vw;
+    font-size: 30px; /* Keeping vw for font-size to make it scalable */
 }
 
 .timer-buttons button:first-child {
@@ -44,51 +44,44 @@ body {
     background-color: yellowgreen;
 }
 
-
 .blinds-header {
-    font-size: 5vw;
+    font-size: 5vw; /* Keeping vw for font-size to make it scalable */
     color: gold;
 }
 
 .chip-container {
     display: flex;
-    /* flex-direction: column; // for MQ  */
     flex-direction: row;
-    /* order: -1; */
     border: white solid 0.3rem;
     border-radius: 2rem;
     background-color: darkslateblue;
-    padding: 1.5rem 0rem;
+    padding: 2vh 0; /* Using vh for padding */
     box-sizing: border-box;
-    width:100%;
+    width: 100%;
     overflow-x: auto;
+    justify-content: center;
 }
 
-.chip{
-    padding: 0rem 1.5rem;
-    
+.chip {
+    padding: 0 50px; /* Using vw for padding */
 }
 
 .timer-function-container {
-    margin:auto;
-    margin-top: 1rem;
+    margin: auto;
+    margin-top: 5vh; /* Using vh for margin */
 }
 
 .page-cont {
     display: flex;
-    /* flex-direction: row; // change for MQ */
     flex-direction: column;
-    /* align-items: flex-start;
-    justify-content: space-between; */
-
+    align-items: center; /* Centering horizontally */
 }
 
 select {
-  padding: 0.5rem;
-  font-size: 5vw;
-  border: 0.25rem solid #ccc;
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
+    padding: 2vh;
+    font-size: 20px; /* Keeping vw for font-size to make it scalable */
+    border: 0.25rem solid #ccc;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
 }
-

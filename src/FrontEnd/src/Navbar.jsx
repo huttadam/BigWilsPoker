@@ -32,7 +32,8 @@ const Navbar = () => {
     
       <div id="navbarBasicExample" onClick={toggleHamburger} ref={navbarRef} className="navbar-menu">
         <div className="navbar-start">
-          <Link to="/NewGame" className="navbar-item">New Game</Link>
+        <Link to="/manageGames" className="navbar-item">Manage</Link>
+          <Link to="/games" className="navbar-item">History</Link>
           <Link to="/players" className="navbar-item">Players</Link>
           <Link to="/blinds" className="navbar-item">Blinds</Link>
         </div>

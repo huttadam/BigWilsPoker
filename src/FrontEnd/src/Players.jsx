@@ -1,6 +1,7 @@
 import React from 'react';
 import NewPlayer from './NewPlayer';
 import { Link } from 'react-router-dom';
+import './Players.css';
 
 const Players = ({ players, setPlayers }) => {
 
@@ -19,7 +20,6 @@ const Players = ({ players, setPlayers }) => {
       console.error('Error deleting player:', error);
     }
   };
-
 
   return (
     <>
@@ -52,17 +52,14 @@ const Players = ({ players, setPlayers }) => {
                 <td>{player.n_name}</td>
                 <td>{player.mobile}</td>
                 <td>
-                  <div
-                  onClick={() => handleDelete(player._id)}>❌</div>
+                  <div onClick={() => handleDelete(player._id)}>❌</div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <button className='create-button'>
-        <Link to="/newPlayer">Add New</Link>
-      </button>
+      <Link to="/newPlayer" className='button-link'>Add New</Link>
     </>
   )
 }

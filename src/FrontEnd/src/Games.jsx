@@ -8,9 +8,6 @@ const Games = ({ games, setGames, players, setPlayers }) => {
     return resPlayer ? resPlayer.n_name : 'Player not found';
   }
 
-
- 
-
   return (
     <>
       <div className='page-cont'>
@@ -33,4 +30,3 @@ const Games = ({ games, setGames, players, setPlayers }) => {
 };
 
 export default Games;
-

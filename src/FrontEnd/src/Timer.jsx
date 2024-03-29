@@ -9,6 +9,8 @@ import Blinds from './Blinds.jsx'
     const [currentLevel, setCurrentLevel] = useState(0)
     const [showDropdown, setShowDropdown] = useState(false)
 
+
+
     const blinds = [
         {level: 0, name: "100 / 200", small: 100, big: 200},
         {level: 1, name: "200 / 400", small: 200, big: 400},

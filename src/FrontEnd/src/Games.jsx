@@ -12,6 +12,7 @@ const Games = ({ games, setGames, players, setPlayers }) => {
     <>
       <div className='page-cont'>
         {games.filter(g => g.isFinished == true).map((game, index) => (
+          console.log(game),
           <div key={index} className="card">
             <img src="./src/assets/defaultProfile.jpeg" alt="default profile" className="card-img-top"/>
             <div className="card-body">

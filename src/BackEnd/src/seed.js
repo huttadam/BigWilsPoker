@@ -25,16 +25,34 @@ const insertedPlayers = await playerModel.insertMany(playersArr)
 console.log('Players Added')
 
 const games = [
+    {
+        date: "2024/06/28" ,
+        playersPlaying:[insertedPlayers[12],insertedPlayers[11],insertedPlayers[10],insertedPlayers[9],insertedPlayers[8],insertedPlayers[5],insertedPlayers[6],insertedPlayers[7]],
+        isFinished: false,
+},
+    {
+        date: "2024/05/28" ,
+        playersPlaying:[insertedPlayers[4],insertedPlayers[5],insertedPlayers[6],insertedPlayers[7],insertedPlayers[8],insertedPlayers[9],insertedPlayers[10],insertedPlayers[11]],
+        isFinished: false,
+},
 
     {
     date: "2024/04/28" ,
     playersPlaying:[insertedPlayers[0],insertedPlayers[1],insertedPlayers[2],insertedPlayers[3],insertedPlayers[4],insertedPlayers[5],insertedPlayers[6],insertedPlayers[7]],
-    isFinished: false
+    isFinished: true,
+    winner: insertedPlayers[0],
+    runnerUp:insertedPlayers[1],
+    firstEliminated:insertedPlayers[6],
+    secondEliminated: insertedPlayers[7]
 },
     {
     date: "2024/03/28",
     playersPlaying:[insertedPlayers[1],insertedPlayers[8],insertedPlayers[2],insertedPlayers[6],insertedPlayers[4],insertedPlayers[5],insertedPlayers[10],insertedPlayers[11]],
-    isFinished: false
+    isFinished: true,
+    winner: insertedPlayers[4],
+    runnerUp:insertedPlayers[1],
+    firstEliminated:insertedPlayers[5],
+    secondEliminated: insertedPlayers[11]
 },
     {
     date: "2024/02/28",

@@ -28,6 +28,20 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const updatedGame = await gameModel.findByIdAndUpdate(id, req.body, { new: true });
+        if (!updatedGame) {
+            return res.status(404).send({ error: 'Game not found' });
+        }
+        res.status(200).send(updatedGame);
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
+});
+
+
 router.delete('/:id', async (req, res) => {
     try {
         const deletedGame = await gameModel.findByIdAndDelete(req.params.id)

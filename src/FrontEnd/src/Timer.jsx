@@ -9,7 +9,11 @@ import Blinds from './Blinds.jsx'
     const [currentLevel, setCurrentLevel] = useState(0)
     const [showDropdown, setShowDropdown] = useState(false)
 
-
+    const [winner, setWinner] = useState("")
+    const [runnerUp, setRunnerUp] = useState("")
+    const [firstOut, setFirstOut] = useState("")
+    const [secondOut, setSecondOut] = useState("")
+    const [isDone, setDone] = useState("")
 
     const blinds = [
         {level: 0, name: "100 / 200", small: 100, big: 200},

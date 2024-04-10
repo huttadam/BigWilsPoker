@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ManageGames.css'; // Import CSS file for styling
+import CreateGame from './CreateGame';
+import { Link } from 'react-router-dom'
 
 const ManageGames = ({ games, setGames, players, setPlayers }) => {
   const [playing, setPlaying] = useState([]);
@@ -11,6 +13,21 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
   const [firstOut, setFirstOut] = useState("")
   const [secondOut, setSecondOut] = useState("")
   const [isDone, setIsDone] = useState(false)
+
+  useEffect(() => {
+    if (!winner && playing.length > 0) {
+      setWinner(playing[0]._id);
+    }
+    if (!runnerUp && playing.length > 0) {
+      setRunnerUp(playing[0]._id);
+    }
+    if (!firstOut && playing.length > 0) {
+      setFirstOut(playing[0]._id);
+    }
+    if (!secondOut && playing.length > 0) {
+      setSecondOut(playing[0]._id);
+    }
+  }, [winner, runnerUp, firstOut, secondOut, playing]);
 
 
 
@@ -25,15 +42,24 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
 
   const movePlayerToReserved = (index) => {
     const player = playing[index];
+    const updatedGames = games.map(game => ({...game, playersPlaying: game.playersPlaying.filter(playerId => playerId !== player._id)}))
+    
     setPlaying(prevPlaying => prevPlaying.filter((_, i) => i !== index));
     setReserved(prevReserved => [...prevReserved, player]);
+    setGames(updatedGames);
+
   };
 
   const movePlayerToPlaying = (index) => {
     const player = reserved[index];
     if (playing.length < 10) {
+      const updatedGames = games.map(game => ({
+        ...game,
+        playersPlaying: [...game.playersPlaying, player._id]
+      }));
       setReserved(prevReserved => prevReserved.filter((_, i) => i !== index));
       setPlaying(prevPlaying => [...prevPlaying, player]);
+      setGames(updatedGames);
     }
   };
 
@@ -60,7 +86,7 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
     console.log(updatedGame.runnerUp)
     console.log(updatedGame.firstEliminated)
     console.log(updatedGame.secondEliminated)
-    console.log(updatedGame.isFinished)
+    // console.log(updatedGame.isFinished)
 
 
     const updatedGames = [...games];
@@ -70,7 +96,7 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
     updatedGames[gameIndex] = updatedGame;
     console.log(updatedGame)
 
-     // Update the state with the new games array
+    // Update the state with the new games array
     setGames(updatedGames);
 
     fetch(`http://127.0.0.1:8888/games/${updatedGame._id}`, {
@@ -96,17 +122,19 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
 
   return (
     <div className='page-cont'>
+      <button className="button" type="Link">
+        <Link to={'/createGames'} element={<CreateGame games={games} setGames={setGames} players={players} setPlayers={setPlayers} />} >Create Game</Link>
+      </button>
       {games.filter(g => !g.isFinished).map((game, index) => (
         <div key={index} className="card">
-          <img src="./src/assets/defaultProfile.jpeg" className="card-img-top" alt="Default profile"/>
+          <img src="./src/assets/defaultProfile.jpeg" className="card-img-top" alt="Default profile" />
           <div className="card-body">
             <h1 className="card-title">Date: {game.date}</h1>
             <h1>Playing</h1>
             <ol>
-              {playing.map((playerId, playerIndex) => (
+              {playing.map((player, playerIndex) => (
                 <li key={playerIndex} className="list-item">
-                  <span className="index">{playerIndex + 1 + "."}</span>
-                  <span className="content">{playerId.n_name}</span>
+                  <span className="content">{player.n_name}</span>
                   <button className="action-button drop-button" onClick={() => movePlayerToReserved(playerIndex)}>Drop</button>
                 </li>
               ))}
@@ -115,87 +143,78 @@ const ManageGames = ({ games, setGames, players, setPlayers }) => {
             <ol>
               {reserved.map((player, playerIndex) => (
                 <li key={playerIndex} className="list-item">
-                  <span className="index">{playerIndex + 1}</span>
+                  {/* {console.log(reserved)} */}
                   <span className="content">{player.n_name}</span>
                   <button className="action-button promote-button" onClick={() => movePlayerToPlaying(playerIndex)}>Promote</button>
                 </li>
               ))}
             </ol>
-            <h1 href="#" className="drop-menu" onClick = {enterFinalDetails}>Game details</h1>
+            <h1 href="#" className="drop-menu" onClick={enterFinalDetails}>Game details</h1>
             <div>
-            {finishedSettings && (
-                <div>
+              {finishedSettings && (
+                <>
+                  <div>
                     <h2>Winner:</h2>
                     <select onChange={e => setWinner(e.target.value)}>
-                    {playing.map((p, i) => (
-                        <option key={i} value={p._id}>
-                        {i + 1} : {p.n_name}
+                      {playing.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.n_name}
                         </option>
-                    ))}
+                      ))}
                     </select>
-                </div>
-                )}  
-            {finishedSettings && (
-                <div>
+                  </div>
+                  <div>
                     <h2>Runner Up:</h2>
                     <select onChange={e => setRunnerUp(e.target.value)}>
-                    {playing.map((p, i) => (
-                        <option key={i} value={p._id}>
-                        {i + 1} : {p.n_name}
+                      {playing.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.n_name}
                         </option>
-                    ))}
+                      ))}
                     </select>
-                </div>    
-                    )}
-            {finishedSettings && (
-                <div>
+                  </div>
+                  <div>
                     <h2>First Eliminated:</h2>
                     <select onChange={e => setFirstOut(e.target.value)}>
-                    {playing.map((p, i) => (
-                        <option key={i} value={p._id}>
-                        {i + 1} : {p.n_name}
+                      {playing.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.n_name}
                         </option>
-                    ))}
+                      ))}
                     </select>
-                </div>    
-                    )}
-            {finishedSettings && (
-                <div>
+                  </div>
+                  <div>
                     <h2>Second Eliminated:</h2>
                     <select onChange={e => setSecondOut(e.target.value)}>
-                    {playing.map((p, i) => (
-                        <option key={i} value={p._id}>
-                        {i + 1} : {p.n_name}
+                      {playing.map((p) => (
+                        <option key={p._id} value={p._id}>
+                          {p.n_name}
                         </option>
-                    ))}
+                      ))}
                     </select>
-                </div>    
-                    )}
-            {finishedSettings && (
-                <div>
+                  </div>
+                  <div>
                     <h2>Game Complete:</h2>
                     <label>
-                        <input 
+                      <input
                         type="checkbox"
                         checked={isDone}
                         onChange={handleIsDoneToggle}
-                         />
+                      />
                     </label>
-
-                </div>    
-                    )}
-            {finishedSettings && (
-                <a href="#" className="edit-button" onClick={saveGameAsComplete}>Complete</a>   
-            )}     
+                  </div>
+                  <a href="#" className="edit-button" onClick={saveGameAsComplete}>Complete</a>
+                </>
+              )}
             </div>
             <a href="#" className="edit-button">Send Message</a>
-
           </div>
         </div>
       ))}
-    </div>  
+    </div>
   );
-};
+    
+}
 
 export default ManageGames;
 

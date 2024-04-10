@@ -19,28 +19,16 @@
   
   .list-item {
     display: flex;
-    flex-basis: 50%; /* Adjust the width as needed */
+    flex-basis: 50%;
     padding: 5px;
     align-items: center;
   }
   
-  .index {
-    flex: 1;
-    text-align: center;
-  }
-  
   .content {
-    flex: 3;
-  }
-  
-  .change-button {
     flex: 1;
   }
-
-
+  
   .action-button {
-    padding: 8px 16px;
-    /* margin-left: 8px; */
     margin-left: auto;
     background-color: #007bff;
     color: #fff;
@@ -52,29 +40,20 @@
   .action-button:hover {
     background-color: #0056b3;
   }
-  
-  .drop-button,
-  .promote-button {
-    margin-top: 4px;
-  }
-  
-  .edit-button,
-  .complete-button {
-    margin-top: 10px;
-  }
-  
-  .button {
-    display: inline-block;
-    padding: 1rem 2.5rem;
+
+  .save-button {
+    width: 10rem;
+    display: block;
     background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    color: white;
     text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
   }
   
-  .button:hover {
+  .save-button:hover {
     background-color: #0056b3;
   }
   
